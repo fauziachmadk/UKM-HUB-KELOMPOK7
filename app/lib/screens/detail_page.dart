@@ -132,6 +132,37 @@ class DetailPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
+            Wrap(
+              spacing: 10,
+              runSpacing: 8,
+              children: [
+                Chip(
+                  avatar: const Icon(Icons.people_outline, size: 18),
+                  label: Text('${ukm.jumlahAnggota} anggota'),
+                ),
+                Chip(
+                  avatar: const Icon(Icons.calendar_today_outlined, size: 16),
+                  label: Text('Berdiri ${ukm.berdiri.year}'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Icon(Icons.person_outline, color: cs.primary, size: 21),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'Ketua: ${ukm.ketua}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      height: 1.6,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
             FilledButton(
               key: const Key('register-ukm'),
               onPressed: ukm.bukaRekrutmen && !_alreadyRegistered
