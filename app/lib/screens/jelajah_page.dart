@@ -9,9 +9,6 @@ import '../widgets/ukm_card.dart';
 
 // BEGIN UKM07-AZKA-EXPLORE
 // MULAI BAGIAN AZKA. Signature ini sudah digunakan MainPage milik Fauzi.
-// TODO(AZKA): ChoiceChip 5 bidang + semua dengan request server; pencarian
-// nama lokal beserta dispose controller; hasil kosong; grid adaptif layar sempit;
-// tata letak setara acuan DEV. RefreshIndicator/Hero setelah fitur wajib.
 class JelajahPage extends StatefulWidget {
   const JelajahPage({
     super.key,

@@ -66,11 +66,11 @@ class DetailPage extends StatelessWidget {
 
   // BEGIN UKM07-AZKA-DETAIL-VIEW
   // MULAI BAGIAN AZKA.
-  // TODO(AZKA): tambahkan ketua/anggota/tahun/kegiatan dan konteks detail kaya
-  // sesuai DEV; nama tetap jelas saat scroll; CTA jangan mengubah alur Vanesa.
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final registered = _alreadyRegistered;
+    final canRegister = ukm.bukaRekrutmen && !registered;
     return Scaffold(
       // Nama tetap terlihat saat pengguna menggulir penjelasan panjang.
       appBar: AppBar(
@@ -229,21 +229,113 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
             ],
+            const SizedBox(height: 28),
+            Container(
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                color: registered
+                    ? cs.primaryContainer
+                    : cs.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    registered
+                        ? Icons.check_circle_outline
+                        : ukm.bukaRekrutmen
+                        ? Icons.how_to_reg_outlined
+                        : Icons.lock_outline,
+                    color: registered ? cs.onPrimaryContainer : cs.primary,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          registered
+                              ? 'Kamu sudah terdaftar'
+                              : ukm.bukaRekrutmen
+                              ? 'Minat bergabung sedang dibuka'
+                              : 'Rekrutmen sedang ditutup',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            color: registered
+                                ? cs.onPrimaryContainer
+                                : cs.onSurface,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          registered
+                              ? 'Minatmu untuk ${ukm.nama} sudah tersimpan. Perbarui alasan atau hapus minat melalui Pendaftaran Saya.'
+                              : ukm.bukaRekrutmen
+                              ? 'Isi nama, NIM, dan alasanmu bergabung dengan ${ukm.nama}. Hasilnya langsung muncul di Pendaftaran Saya. Setiap UKM hanya bisa didaftarkan satu kali dalam sesi ini.'
+                              : 'Kamu tetap bisa mengenal ${ukm.nama} melalui profil dan kegiatan di halaman ini. Form minat belum tersedia selama rekrutmen ditutup.',
+                          style: TextStyle(
+                            height: 1.7,
+                            color: registered
+                                ? cs.onPrimaryContainer
+                                : cs.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 24),
-            FilledButton(
-              key: const Key('register-ukm'),
-              onPressed: ukm.bukaRekrutmen && !_alreadyRegistered
-                  ? () => _register(context)
-                  : null,
-              child: Text(
-                _alreadyRegistered
-                    ? 'Sudah terdaftar'
-                    : ukm.bukaRekrutmen
-                    ? 'Saya berminat'
-                    : 'Rekrutmen tutup',
+            Text(
+              'Katalog ini memakai data contoh untuk UTS. Minat hanya tersimpan selama sesi aplikasi dan belum dikirim kepada pengurus UKM.',
+              style: TextStyle(
+                fontSize: 11,
+                color: cs.onSurfaceVariant,
+                height: 1.7,
               ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: ContentWidth(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 10, 24, 14),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Minat bergabung dengan ${ukm.nama}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 12, color: cs.onSurfaceVariant),
+                ),
+                const SizedBox(height: 10),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton.icon(
+                    key: const Key('register-ukm'),
+                    onPressed: canRegister ? () => _register(context) : null,
+                    icon: Icon(
+                      registered
+                          ? Icons.check_circle_outline
+                          : ukm.bukaRekrutmen
+                          ? Icons.arrow_forward
+                          : Icons.lock_outline,
+                    ),
+                    label: Text(
+                      registered
+                          ? 'Sudah terdaftar'
+                          : ukm.bukaRekrutmen
+                          ? 'Saya berminat'
+                          : 'Rekrutmen belum dibuka',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
