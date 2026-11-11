@@ -185,6 +185,50 @@ class DetailPage extends StatelessWidget {
                 style: TextStyle(color: cs.onSurfaceVariant, height: 1.8),
               ),
             ),
+            if (ukm.kegiatan.isNotEmpty) ...[
+              const SizedBox(height: 28),
+              _DetailSection(
+                title: 'Kegiatan di ${ukm.nama}',
+                child: Column(
+                  key: const Key('detail-activities'),
+                  children: ukm.kegiatan
+                      .asMap()
+                      .entries
+                      .map(
+                        (entry) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 9),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 30,
+                                child: Text(
+                                  '${entry.key + 1}'.padLeft(2, '0'),
+                                  style: TextStyle(
+                                    color: cs.primary,
+                                    fontWeight: FontWeight.w800,
+                                    height: 1.6,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  entry.value,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    height: 1.6,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ],
             const SizedBox(height: 24),
             FilledButton(
               key: const Key('register-ukm'),
