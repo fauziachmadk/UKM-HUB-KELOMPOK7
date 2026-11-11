@@ -1,42 +1,61 @@
-// Tes backend. Penanggung jawab: Muhammad Aditya Djalil - 102022300225.
-// Reviewer kontrak: Arief Setiawan. Koordinasikan giliran sebelum edit file sama.
 import 'dart:convert';
 import 'dart:io';
 import 'package:shelf/shelf.dart';
 import 'package:test/test.dart';
 import 'package:ukm_hub_server/api.dart';
 
-// BEGIN UKM07-DJALIL-API-TESTS
-// MULAI BAGIAN DJALIL.
-// TODO(DJALIL): naikkan pemeriksaan ke minimal 12 item dan kelengkapan field,
-// tambah tes filter server, bidang tidak dikenal, dan detail valid.
 void main() {
-  final items = (jsonDecode(File('data/ukm.json').readAsStringSync()) as List)
+  final data = (jsonDecode(File('data/ukm.json').readAsStringSync()) as List)
       .cast<Map<String, dynamic>>();
-  final api = createApi(items);
-  test('dataset awal memiliki id unik dan tanggal yang dapat dibaca', () {
-    expect(items.length, greaterThanOrEqualTo(5));
-    expect(items.map((e) => e['id']).toSet().length, items.length);
-    for (final item in items) {
+  final api = createApi(data);
+  Future<Response> get(String path) async =>
+      api(Request('GET', Uri.parse('http://localhost$path')));
+
+  test('dataset memiliki >=12 UKM, id unik, tipe dan seluruh bidang wajib', () {
+    expect(data.length, greaterThanOrEqualTo(12));
+    expect(data.map((e) => e['id']).toSet().length, data.length);
+    expect(data.map((e) => e['bidang']).toSet(), {
+      'Seni',
+      'Olahraga',
+      'Teknologi',
+      'Keagamaan',
+      'Sosial',
+    });
+    for (final item in data) {
+      expect(item['jumlahAnggota'], isA<int>());
       expect(item['bukaRekrutmen'], isA<bool>());
       expect(DateTime.tryParse(item['berdiri'] as String), isNotNull);
+      expect(File('../app/${item['logo']}').existsSync(), isTrue);
     }
   });
-  test('GET katalog mengembalikan dataset', () async {
-    final response = await api(
-      Request('GET', Uri.parse('http://unit.test/ukm')),
-    );
+  test('GET daftar mengembalikan JSON utf8 dan semua UKM', () async {
+    final response = await get('/ukm');
     expect(response.statusCode, 200);
+    expect(response.headers['content-type'], contains('application/json'));
     expect(
       (jsonDecode(await response.readAsString()) as List).length,
-      items.length,
+      data.length,
     );
   });
-  test('id tidak dikenal mengembalikan 404', () async {
-    final response = await api(
-      Request('GET', Uri.parse('http://unit.test/ukm/tidak-ada')),
+  test('GET khas benar-benar memfilter bidang server-side', () async {
+    final response = await get('/ukm?bidang=Teknologi');
+    final items = jsonDecode(await response.readAsString()) as List;
+    expect(items, isNotEmpty);
+    expect(items.every((e) => e['bidang'] == 'Teknologi'), isTrue);
+    expect(items.length, lessThan(data.length));
+  });
+  test('GET detail benar dan id tidak ada menghasilkan 404', () async {
+    expect(
+      jsonDecode(await (await get('/ukm/aksara')).readAsString())['nama'],
+      'Aksara',
     );
-    expect(response.statusCode, 404);
+    expect((await get('/ukm/tidak-ada')).statusCode, 404);
+    expect((await get('/unknown')).statusCode, 404);
+  });
+  test('filter tidak ada menghasilkan daftar kosong', () async {
+    expect(
+      jsonDecode(await (await get('/ukm?bidang=Invalid')).readAsString()),
+      isEmpty,
+    );
   });
 }
-// END UKM07-DJALIL-API-TESTS - DJALIL SAMPAI SINI.
