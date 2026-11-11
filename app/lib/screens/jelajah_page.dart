@@ -61,56 +61,98 @@ class _JelajahPageState extends State<JelajahPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Text('UKM Hub'),
-      actions: [
-        IconButton(
-          tooltip: 'Ganti tema',
-          onPressed: widget.onToggleTheme,
-          icon: const Icon(Icons.brightness_6_outlined),
-        ),
-        IconButton(
-          tooltip: 'Buka profil',
-          onPressed: widget.onProfile,
-          icon: const Icon(Icons.person_outline),
-        ),
-      ],
-    ),
-    body: ContentWidth(
-      child: FutureBuilder<List<Ukm>>(
-        future: _future,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasError) {
-            return HubMessage(
-              icon: Icons.cloud_off_outlined,
-              title: 'Katalog belum tersedia',
-              message: '${snapshot.error}',
-              action: FilledButton(
-                onPressed: _reload,
-                child: const Text('Coba lagi'),
+  Widget build(BuildContext context) {
+    return ContentWidth(
+      child: CustomScrollView(
+        key: const PageStorageKey('jelajah-scroll'),
+        slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 18, 16, 18),
+              child: Row(
+                children: [
+                  Image.asset(
+                    'assets/images/launcher.png',
+                    width: 32,
+                    height: 32,
+                  ),
+                  const SizedBox(width: 9),
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'UKM Hub',
+                          style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: -1,
+                          ),
+                        ),
+                        Text(
+                          'Temukan komunitas kampusmu',
+                          style: TextStyle(fontSize: 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    key: const Key('theme-toggle'),
+                    onPressed: widget.onToggleTheme,
+                    tooltip: Theme.of(context).brightness == Brightness.dark
+                        ? 'Aktifkan tema terang'
+                        : 'Aktifkan tema gelap',
+                    icon: Icon(
+                      Theme.of(context).brightness == Brightness.dark
+                          ? Icons.light_mode_outlined
+                          : Icons.dark_mode_outlined,
+                    ),
+                  ),
+                  IconButton.filledTonal(
+                    onPressed: widget.onProfile,
+                    tooltip: 'Buka profil',
+                    icon: const Icon(Icons.person_outline),
+                  ),
+                ],
               ),
-            );
-          }
-          final items = snapshot.data ?? [];
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text('${items.length} UKM - katalog dasar'),
-              ),
-              Expanded(
+            ),
+          ),
+          FutureBuilder<List<Ukm>>(
+            future: _future,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return const SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.all(48),
+                    child: Center(child: CircularProgressIndicator()),
+                  ),
+                );
+              }
+              if (snapshot.hasError) {
+                return SliverToBoxAdapter(
+                  child: HubMessage(
+                    icon: Icons.cloud_off_outlined,
+                    title: 'Katalog belum tersedia',
+                    message: '${snapshot.error}',
+                    action: FilledButton(
+                      onPressed: _reload,
+                      child: const Text('Coba lagi'),
+                    ),
+                  ),
+                );
+              }
+              final items = snapshot.data ?? [];
+              return SliverToBoxAdapter(
                 child: GridView.builder(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                  shrinkWrap: true,
+                  primary: false,
+                  physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 260,
-                    mainAxisExtent: 200,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8,
+                    mainAxisExtent: 254,
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 12,
                   ),
                   itemCount: items.length,
                   itemBuilder: (context, index) => UkmCard(
@@ -121,12 +163,12 @@ class _JelajahPageState extends State<JelajahPage> {
                     onTap: () => widget.onOpen(items[index]),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
+              );
+            },
+          ),
+        ],
       ),
-    ),
-  );
+    );
+  }
 }
 // END UKM07-AZKA-EXPLORE - AZKA SAMPAI SINI.
