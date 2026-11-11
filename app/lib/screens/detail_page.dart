@@ -23,8 +23,23 @@ class DetailPage extends StatelessWidget {
 
   // BEGIN UKM07-AZKA-DETAIL-GUIDE
   // MULAI BAGIAN AZKA. Status memakai aturan duplikat bersama.
-  // TODO(AZKA): tambahkan panduan bidang tanpa mengarang informasi resmi.
   bool get _alreadyRegistered => hasRegistrationForUkm(registrations, ukm.id);
+
+  // Panduan minat berdasarkan bidang, bukan klaim jadwal atau syarat resmi UKM.
+  String get _interestGuide => switch (ukm.bidang) {
+    'Seni' =>
+      'Kamu yang ingin mengembangkan ekspresi, mencoba proses kreatif, dan menghasilkan karya bersama teman kampus.',
+    'Teknologi' =>
+      'Kamu yang senang mencoba ide, memecahkan masalah, dan belajar teknologi melalui proyek bersama.',
+    'Olahraga' =>
+      'Kamu yang ingin membangun kebiasaan bergerak, mengasah teknik, dan menikmati kerja sama dalam latihan.',
+    'Keagamaan' =>
+      'Kamu yang ingin memperdalam pemahaman, mengikuti kegiatan kerohanian, dan bertumbuh bersama komunitas.',
+    'Sosial' =>
+      'Kamu yang tertarik berbagi pengetahuan, menjadi relawan, dan berkontribusi pada lingkungan sekitar.',
+    _ =>
+      'Kamu yang ingin mengenal teman baru dan mengembangkan minat melalui kegiatan bersama.',
+  };
   // END UKM07-AZKA-DETAIL-GUIDE - AZKA SAMPAI SINI.
 
   // BEGIN UKM07-VANESA-DETAIL-HANDOFF
@@ -161,6 +176,14 @@ class DetailPage extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 28),
+            _DetailSection(
+              title: 'Cocok untuk kamu yang...',
+              child: Text(
+                _interestGuide,
+                style: TextStyle(color: cs.onSurfaceVariant, height: 1.8),
+              ),
             ),
             const SizedBox(height: 24),
             FilledButton(
