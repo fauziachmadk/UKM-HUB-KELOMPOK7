@@ -5,9 +5,6 @@ import 'hub_widgets.dart';
 
 // BEGIN UKM07-AZKA-CARD
 // MULAI BAGIAN AZKA.
-// TODO(AZKA): kembangkan kartu custom dengan Row/Column/Expanded/Stack,
-// Positioned untuk Open Recruitment, layout responsif, dan konteks terdaftar.
-// Baseline sengaja sederhana; jangan menyatakan syarat kartu final sudah lengkap.
 class UkmCard extends StatelessWidget {
   const UkmCard({
     super.key,
