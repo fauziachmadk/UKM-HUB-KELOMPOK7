@@ -69,8 +69,8 @@ def checklist():
           'Nama aplikasi yang ditampilkan adalah UKM Hub.'),
          ('P01–P02: 3. Android dan minimal 4 screenshot',
           [('screenshots/README.md', '# Screenshot')],
-          'Seluruh 16 screenshot Android ditampilkan pada bagian 3. Asal gambar dan catatan pengujian '
-          'perangkat dijelaskan pada QA.'),
+          'Sebanyak 16 tangkapan layar Android disajikan pada Bagian 3. Asal gambar dan catatan pengujian '
+          'perangkat tercantum pada QA.'),
          ('P01–P02: 4. Hasil flutter analyze',
           [('docs/QA.md', '## Pemeriksaan versi gabungan')],
           'flutter analyze selesai tanpa error maupun warning pada 12 November 2026.'),
@@ -83,7 +83,7 @@ def checklist():
          ('P03: 2. TextField, controller, dan dispose',
           [('app/lib/screens/jelajah_page.dart', 'TextField('),
            ('app/lib/screens/jelajah_page.dart', '_search.dispose()')],
-          'Kolom pencarian menggunakan controller yang ditutup melalui dispose.'),
+          'Kolom pencarian menggunakan controller dengan pelepasan sumber daya melalui dispose.'),
          ('P03: 3. Minimal 2 jenis tombol Material 3',
           [('app/lib/screens/registration_form.dart', 'FilledButton.icon('),
            ('app/lib/screens/registration_form.dart', 'OutlinedButton(')],
@@ -124,12 +124,12 @@ def checklist():
           [('app/lib/screens/registration_form.dart', 'Navigator.pop(context, record)'),
            ('app/lib/screens/main_page.dart', 'await Navigator.push'),
            ('app/lib/screens/main_page.dart', '_registrations.insert(0, record)')],
-          'Form mengembalikan data melalui Navigator.pop. MainPage menunggu hasil dengan await, menambah '
-          'data, lalu membuka Pendaftaran Saya.'),
+          'Formulir mengembalikan data melalui Navigator.pop. MainPage menerima hasil dengan await, '
+          'memperbarui daftar, dan menampilkan tab Pendaftaran Saya.'),
          ('P05: 3. Pemeriksaan mounted setelah await',
           [('app/lib/screens/main_page.dart', 'if (!mounted || record == null)'),
            ('app/lib/screens/detail_page.dart', 'if (!context.mounted')],
-          'mounted diperiksa sebelum memakai context atau memperbarui state setelah await.'),
+          'Pemeriksaan mounted dilakukan sebelum penggunaan context atau pembaruan state setelah await.'),
          ('P05: 4. Minimal 3 widget test dan hasil pengujian',
           [('app/test/flows_test.dart', 'testWidgets('), ('docs/QA.md', '## Pemeriksaan versi gabungan')],
           'Sebanyak 12 widget test dan 5 tes layanan lulus pada 12 November 2026.'),
@@ -162,8 +162,8 @@ def checklist():
          ('P07: 3. Paket http dan konfigurasi API_URL',
           [('app/lib/services/api_service.dart', "'package:http/http.dart'"),
            ('app/lib/services/api_service.dart', "'API_URL'")],
-          'ApiService menggunakan paket http; alamat server ditentukan melalui API_URL saat menjalankan '
-          'aplikasi.'),
+          'ApiService menggunakan paket http dengan alamat server yang ditentukan melalui konfigurasi '
+          'API_URL.'),
          ('P07: 4. fromJson, toJson, dan konversi DateTime',
           [('app/lib/models/ukm.dart', 'factory Ukm.fromJson'),
            ('app/lib/models/ukm.dart', 'DateTime.parse('),
@@ -173,8 +173,8 @@ def checklist():
           [('app/lib/screens/jelajah_page.dart', 'FutureBuilder<List<Ukm>>'),
            ('app/lib/screens/jelajah_page.dart', 'snapshot.hasError'),
            ('app/lib/screens/jelajah_page.dart', "Text('Coba lagi')")],
-          'FutureBuilder menampilkan keadaan memuat, pesan gagal dengan tombol Coba lagi, dan katalog saat '
-          'berhasil.'),
+          'FutureBuilder menangani pemuatan data, kegagalan dengan tombol Coba lagi, dan penyajian katalog '
+          'setelah permintaan berhasil.'),
          ('P07: 6. Pengujian menggunakan MockClient',
           [('app/test/api_service_test.dart', 'MockClient('),
            ('docs/QA.md', '## Pemeriksaan versi gabungan')],

@@ -1,7 +1,7 @@
 # Screenshot Android
 
 Folder ini berisi 16 screenshot Android. Seluruh gambar ditampilkan
-pada [bagian Screenshot Android di README utama](../README.md#3-screenshot-android).
+pada [bagian dokumentasi tampilan aplikasi pada README utama](../README.md#3-dokumentasi-tampilan-aplikasi-android).
 
 Gambar 01-09 mencatat tampilan dan pengujian awal. Gambar 10-16 mencatat
 penyempurnaan tampilan Jelajah, detail, form, pendaftaran, dan tema gelap.
