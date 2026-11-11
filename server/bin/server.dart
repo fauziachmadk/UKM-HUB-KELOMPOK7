@@ -1,25 +1,29 @@
-// Bootstrap server. Penanggung jawab: Muhammad Aditya Djalil - 102022300225.
 import 'dart:convert';
 import 'dart:io';
+import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:ukm_hub_server/api.dart';
 
-// BEGIN UKM07-DJALIL-BOOTSTRAP
-// MULAI BAGIAN DJALIL.
-// TODO(DJALIL): validasi data startup dan pesan error JSON/port yang membantu;
-// tambahkan middleware yang relevan. Tetap tampilkan URL tujuan browser.
 Future<void> main() async {
-  final file = File.fromUri(Platform.script.resolve('../data/ukm.json'));
-  final items = (jsonDecode(await file.readAsString()) as List)
+  final data = File.fromUri(Platform.script.resolve('../data/ukm.json'));
+  final items = (jsonDecode(await data.readAsString()) as List)
       .cast<Map<String, dynamic>>();
-  final host = Platform.environment['HOST'] ?? '0.0.0.0';
   final port = int.parse(Platform.environment['PORT'] ?? '8080');
-  final server = await shelf_io.serve(createApi(items), host, port);
-  stdout.writeln(
-    'UKM Hub KERANGKA aktif (${items.length} UKM contoh; belum dataset final).',
+  final host = Platform.environment['HOST'] ?? '0.0.0.0';
+  final handler = const Pipeline()
+      .addMiddleware(logRequests())
+      .addHandler(createApi(items));
+  final server = await shelf_io.serve(handler, host, port);
+  final address = server.address.address;
+  final browserHost = address == '0.0.0.0' || address == '::'
+      ? 'localhost'
+      : address;
+  final catalogUrl = Uri(
+    scheme: 'http',
+    host: browserHost,
+    port: server.port,
+    path: '/ukm',
   );
-  stdout.writeln(
-    'Buka JSON di browser komputer: http://localhost:${server.port}/ukm',
-  );
+  stdout.writeln('UKM Hub API aktif (${items.length} UKM).');
+  stdout.writeln('Buka JSON di browser komputer: $catalogUrl');
 }
-// END UKM07-DJALIL-BOOTSTRAP - DJALIL SAMPAI SINI.
