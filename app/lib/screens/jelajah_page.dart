@@ -212,6 +212,31 @@ class _JelajahPageState extends State<JelajahPage> {
               ),
             ),
           ),
+          SliverToBoxAdapter(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [null, ...Ukm.bidangList]
+                    .map(
+                      (bidang) => Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: ChoiceChip(
+                          label: Text(bidang ?? 'Semua'),
+                          selected: _bidang == bidang,
+                          onSelected: (_) {
+                            // Filter bidang wajib diproses server.
+                            setState(() => _bidang = bidang);
+                            _reload();
+                          },
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 12)),
           FutureBuilder<List<Ukm>>(
             future: _future,
             builder: (context, snapshot) {
