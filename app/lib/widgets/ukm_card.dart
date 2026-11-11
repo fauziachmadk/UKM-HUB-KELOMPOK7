@@ -20,31 +20,85 @@ class UkmCard extends StatelessWidget {
   final bool isRegistered;
 
   @override
-  Widget build(BuildContext context) => Card(
-    clipBehavior: Clip.antiAlias,
-    child: InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Material(
+      color: cs.surfaceContainerLow,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+        side: BorderSide(color: cs.outlineVariant),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            UkmLogo(ukm: ukm, size: 44),
-            const SizedBox(height: 12),
-            Text(
-              ukm.nama,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+            Expanded(
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  ColoredBox(
+                    color: cs.secondaryContainer,
+                    child: Center(
+                      child: Hero(
+                        tag: 'ukm-${ukm.id}',
+                        child: UkmLogo(ukm: ukm),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            Text(
-              isRegistered ? 'Sudah terdaftar' : ukm.bidang,
-              style: Theme.of(context).textTheme.labelSmall,
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    ukm.bidang.toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 9,
+                      letterSpacing: 1.3,
+                      fontWeight: FontWeight.w700,
+                      color: cs.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    ukm.nama,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    ukm.singkat,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 10, color: cs.onSurfaceVariant),
+                  ),
+                  if (isRegistered) ...[
+                    const SizedBox(height: 8),
+                    Text(
+                      'Sudah terdaftar',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        color: cs.primary,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
             ),
           ],
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 // END UKM07-AZKA-CARD - AZKA SAMPAI SINI.
