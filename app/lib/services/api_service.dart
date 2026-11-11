@@ -1,5 +1,6 @@
 // Modul HTTP. Penanggung jawab: Arief Setiawan - 102022300098.
 // Fondasi hanya menyediakan GET daftar dasar; lihat tugas di region.
+import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/ukm.dart';

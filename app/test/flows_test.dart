@@ -1,9 +1,12 @@
 // Tes integrasi widget dasar. Penanggung jawab: Arief Setiawan - 102022300098.
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ukm_hub/core/app.dart';
+import 'package:ukm_hub/models/pendaftaran.dart';
 import 'package:ukm_hub/models/ukm.dart';
 import 'package:ukm_hub/screens/detail_page.dart';
+import 'package:ukm_hub/screens/registration_form.dart';
 import 'package:ukm_hub/services/api_service.dart';
 import 'fixtures.dart';
 
