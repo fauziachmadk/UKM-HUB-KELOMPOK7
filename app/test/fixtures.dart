@@ -3,15 +3,8 @@ import 'package:ukm_hub/models/ukm.dart';
 
 // BEGIN UKM07-ARIEF-FIXTURES
 // MULAI BAGIAN ARIEF. Tambahkan fixture kasus rekrutmen tutup/JSON invalid.
-Ukm fixtureUkm() => Ukm(
-  id: 'aksara',
-  nama: 'Aksara',
-  bidang: 'Seni',
-  ketua: 'Pengurus Demo',
-  jumlahAnggota: 64,
-  bukaRekrutmen: true,
-  berdiri: DateTime.utc(2016, 8, 17),
-  logo: 'assets/images/seni.svg',
-  deskripsi: 'Komunitas teater contoh untuk pengujian.',
-);
+List<Map<String, dynamic>> fixtureJson() =>
+    (jsonDecode(File('../server/data/ukm.json').readAsStringSync()) as List)
+        .cast<Map<String, dynamic>>();
+List<Ukm> fixtureUkm() => fixtureJson().map(Ukm.fromJson).toList();
 // END UKM07-ARIEF-FIXTURES - ARIEF SAMPAI SINI.
