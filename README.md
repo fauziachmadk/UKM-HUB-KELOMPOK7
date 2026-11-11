@@ -217,8 +217,6 @@ flutter analyze
 flutter test --concurrency=1
 ```
 
-Pengujian pada 12 November 2026 menunjukkan bahwa analisis server dan Flutter selesai tanpa error maupun warning. Seluruh pengujian berhasil, dengan rincian 5 tes server dan 17 tes Flutter yang terdiri atas 12 widget test serta 5 tes layanan menggunakan MockClient. Rincian hasil dan batas pengujian tercatat pada [docs/QA.md](docs/QA.md#pemeriksaan-versi-gabungan-12-november-2026).
-
 ### 5.3 Pembuatan APK debug
 
 APK debug dibuat dari direktori `app` menggunakan perintah berikut:
@@ -245,7 +243,7 @@ Selain fitur wajib, aplikasi menyediakan pull-to-refresh dan animasi Hero pada p
 
 ## 7. Dokumentasi video dan kelengkapan pengumpulan
 
-**Tautan video demo: belum diisi.**
+**https://drive.google.com/drive/folders/1OUS7YqztOCpDII_Vv3wPYoNGTcDr1hpE**
 
 Video demonstrasi harus berdurasi 3-5 menit dengan cakupan sebagai berikut:
 
