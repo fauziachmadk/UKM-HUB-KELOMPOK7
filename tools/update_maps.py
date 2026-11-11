@@ -58,49 +58,154 @@ Import/signature detail bersama melalui Fauzi; jangan mengubah region teman.
 
 
 def checklist():
-    entries = [
-        ("P01/P02-1 org/paket", "app/android/app/build.gradle.kts", 'applicationId =', "Dasar tersedia: id.ac.telkomuniversity.ukm_hub; flutter create sesuai org."),
-        ("P01/P02-2 launcher", "app/android/app/src/main/AndroidManifest.xml", 'android:label=', "Nama UKM Hub dan ikon lokal; QA perangkat dicatat terpisah."),
-        ("P01/P02-3 Android/4 capture", "screenshots/README.md", '# Screenshot', "Belum final: perlu run versi gabungan dan minimal 4 screenshot perangkat."),
-        ("P01/P02-4 analyze", "docs/QA.md", '# QA', "Lihat hasil aktual QA; wajib diulang setelah implementasi anggota."),
-        ("P03-1 widget/state", "app/lib/screens/main_page.dart", 'class MainPage', "Dasar: custom Stateful/Stateless dan setState pada integrasi."),
-        ("P03-2 controller/dispose", "app/lib/screens/registration_form.dart", 'void dispose()', "Dasar tersedia; validasi akhir dan multiline tugas Vanesa."),
-        ("P03-3 dua tombol M3", "app/lib/screens/jelajah_page.dart", 'IconButton(', "Dasar IconButton dan FilledButton; OutlinedButton pada daftar/Profil."),
-        ("P03-4 pilihan", "app/lib/screens/profile_page.dart", 'ChoiceChip(', "Dasar pilihan tema; chip bidang Jelajah belum dibuat Azka."),
-        ("P03-5 SnackBar", "app/lib/screens/main_page.dart", 'showSnackBar(', "Dasar feedback minat; uji gabungan tetap diperlukan."),
-        ("P04-1 model 6+/tanggal/bool", "app/lib/models/ukm.dart", 'final DateTime berdiri', "Kontrak model tersedia, termasuk bool dan DateTime."),
-        ("P04-2 custom card layout", "app/lib/widgets/ukm_card.dart", '// TODO(AZKA)', "Belum: Row/Column/Expanded/Stack dan Positioned badge tugas Azka."),
-        ("P04-3 builder", "app/lib/screens/jelajah_page.dart", 'GridView.builder(', "Grid dasar tersedia; filter/search/responsif perlu diselesaikan."),
-        ("P04-4 tiga tab/IndexedStack", "app/lib/screens/main_page.dart", 'child: IndexedStack(', "Dasar tersedia: Jelajah, Pendaftaran Saya, Profil."),
-        ("P05-1 detail constructor", "app/lib/screens/main_page.dart", 'builder: (_) => DetailPage(', "Ukm diteruskan melalui push dan constructor."),
-        ("P05-2 pop/await/data langsung", "app/lib/screens/registration_form.dart", 'Navigator.pop(', "Alur dasar tersedia; validasi/list akhir masih tugas Vanesa."),
-        ("P05-3 mounted", "app/lib/screens/detail_page.dart", 'if (!context.mounted', "Guard dasar tersedia setelah await; jaga saat mengembangkan."),
-        ("P05-4 tiga widget test", "app/test/flows_test.dart", "testWidgets(", "4 widget test dasar; cakupan final dikembangkan Arief."),
-        ("P06-1 seed/darkTheme", "app/lib/core/app.dart", 'darkTheme:', "Dua tema dan ColorScheme.fromSeed pada core/theme tersedia."),
-        ("P06-2 warna skema", "app/lib/widgets/hub_widgets.dart", 'Theme.of(context).colorScheme', "Widget memakai skema; jaga maksimal 3 Colors.xxx saat pengembangan."),
-        ("P06-3 font", "app/pubspec.yaml", 'family: Manrope', "Font lokal Manrope dengan lisensi OFL."),
-        ("P06-4 ikon", "app/pubspec.yaml", 'flutter_launcher_icons:', "Generator ikon dan aset disediakan; hasil perangkat di QA."),
-        ("P06-5 aset lokal", "app/pubspec.yaml", 'assets/images/', "Logo/ilustrasi terdaftar; UkmLogo dipakai kartu/detail."),
-        ("P07-1 Shelf/12 JSON", "server/data/ukm.json", '"id"', "Sebagian: Shelf/router ada, seed baru 5; Djalil wajib 12+."),
-        ("P07-2 tiga GET/filter", "server/lib/api.dart", "router.get('/ukm'", "Sebagian: daftar/detail ada; filter bidang masih 501, belum memenuhi final."),
-        ("P07-3 http/API_URL", "app/lib/services/api_service.dart", "'API_URL'", "GET daftar dasar; Arief melengkapi query/detail/error/timeout."),
-        ("P07-4 JSON/DateTime", "app/lib/models/ukm.dart", 'DateTime.parse(', "fromJson/toJson tersedia; uji round-trip perlu ditambah."),
-        ("P07-5 FutureBuilder", "app/lib/screens/jelajah_page.dart", 'FutureBuilder<List<Ukm>>(', "Dasar loading/error/retry/sukses tersedia; perlu regresi Arief."),
-        ("P07-6 MockClient", "app/test/api_service_test.dart", 'MockClient(', "1 tes dasar; perlu variasi error dan query/detail."),
-    ]
+    # Status source ditinjau; bukti eksekusi dan perangkat tetap perlu QA.
+    entries = (
+        [('P01–P02: 1. Pembuatan proyek dan nama paket',
+          [('docs/QA.md', 'flutter create'), ('app/android/app/build.gradle.kts', 'applicationId =')],
+          'Proyek dibuat dengan organisasi id.ac.telkomuniversity; nama paket Android '
+          'id.ac.telkomuniversity.ukm_hub.'),
+         ('P01–P02: 2. Nama aplikasi pada launcher',
+          [('app/android/app/src/main/AndroidManifest.xml', 'android:label=')],
+          'Nama aplikasi yang ditampilkan adalah UKM Hub.'),
+         ('P01–P02: 3. Android dan minimal 4 screenshot',
+          [('screenshots/README.md', '# Screenshot')],
+          'Empat screenshot Android ditampilkan pada bagian 3. Asal gambar dan catatan pengujian perangkat '
+          'dijelaskan pada QA.'),
+         ('P01–P02: 4. Hasil flutter analyze',
+          [('docs/QA.md', '## Pemeriksaan versi gabungan')],
+          'flutter analyze selesai tanpa error maupun warning pada 12 November 2026.'),
+         ('P03: 1. StatelessWidget, StatefulWidget, dan setState',
+          [('app/lib/widgets/ukm_card.dart', 'extends StatelessWidget'),
+           ('app/lib/screens/main_page.dart', 'extends StatefulWidget'),
+           ('app/lib/screens/main_page.dart', 'setState(() {')],
+          'UkmCard menggunakan StatelessWidget; MainPage menggunakan StatefulWidget dan setState untuk '
+          'memperbarui tampilan.'),
+         ('P03: 2. TextField, controller, dan dispose',
+          [('app/lib/screens/jelajah_page.dart', 'TextField('),
+           ('app/lib/screens/jelajah_page.dart', '_search.dispose()')],
+          'Kolom pencarian menggunakan controller yang ditutup melalui dispose.'),
+         ('P03: 3. Minimal 2 jenis tombol Material 3',
+          [('app/lib/screens/registration_form.dart', 'FilledButton.icon('),
+           ('app/lib/screens/registration_form.dart', 'OutlinedButton(')],
+          'Form menyediakan FilledButton dan OutlinedButton. IconButton juga digunakan pada aplikasi.'),
+         ('P03: 4. Pilihan menggunakan chip',
+          [('app/lib/screens/jelajah_page.dart', 'ChoiceChip(')],
+          'ChoiceChip menyediakan pilihan Semua dan lima bidang UKM.'),
+         ('P03: 5. Umpan balik menggunakan SnackBar',
+          [('app/lib/screens/main_page.dart', 'Minat berhasil disimpan.')],
+          'SnackBar menampilkan pesan penyimpanan minat dan menyediakan aksi Urungkan setelah '
+          'penghapusan.'),
+         ('P04: 1. Model minimal 6 field, DateTime, dan bool',
+          [('app/lib/models/ukm.dart', 'class Ukm'),
+           ('app/lib/models/ukm.dart', 'final bool'),
+           ('app/lib/models/ukm.dart', 'final DateTime')],
+          'Ukm memiliki delapan field utama, termasuk bukaRekrutmen bertipe bool dan berdiri bertipe '
+          'DateTime.'),
+         ('P04: 2. Kartu dengan Row, Column, Expanded, dan Stack',
+          [('app/lib/widgets/ukm_card.dart', 'Row('),
+           ('app/lib/widgets/ukm_card.dart', 'Column('),
+           ('app/lib/widgets/ukm_card.dart', 'Expanded('),
+           ('app/lib/widgets/ukm_card.dart', 'Stack(')],
+          'UkmCard menyusun logo, informasi UKM, dan lencana rekrutmen menggunakan keempat widget '
+          'tersebut.'),
+         ('P04: 3. Daftar menggunakan builder',
+          [('app/lib/screens/jelajah_page.dart', 'GridView.builder(')],
+          'Katalog UKM ditampilkan menggunakan GridView.builder.'),
+         ('P04: 4. NavigationBar minimal 3 tab dan IndexedStack',
+          [('app/lib/screens/main_page.dart', 'IndexedStack('),
+           ('app/lib/screens/main_page.dart', 'NavigationBar(')],
+          'Tersedia tab Jelajah, Pendaftaran Saya, dan Profil; IndexedStack mempertahankan halaman saat '
+          'berpindah tab.'),
+         ('P05: 1. Detail menerima objek melalui konstruktor',
+          [('app/lib/screens/main_page.dart', 'Navigator.push<Pendaftaran>'),
+           ('app/lib/screens/detail_page.dart', 'required this.ukm')],
+          'Navigator.push membuka DetailPage dengan objek Ukm melalui konstruktor.'),
+         ('P05: 2. Form mengembalikan data dan memperbarui daftar',
+          [('app/lib/screens/registration_form.dart', 'Navigator.pop(context, record)'),
+           ('app/lib/screens/main_page.dart', 'await Navigator.push'),
+           ('app/lib/screens/main_page.dart', '_registrations.insert(0, record)')],
+          'Form mengembalikan data melalui Navigator.pop. MainPage menunggu hasil dengan await, menambah '
+          'data, lalu membuka Pendaftaran Saya.'),
+         ('P05: 3. Pemeriksaan mounted setelah await',
+          [('app/lib/screens/main_page.dart', 'if (!mounted || record == null)'),
+           ('app/lib/screens/detail_page.dart', 'if (!context.mounted')],
+          'mounted diperiksa sebelum memakai context atau memperbarui state setelah await.'),
+         ('P05: 4. Minimal 3 widget test dan hasil pengujian',
+          [('app/test/flows_test.dart', 'testWidgets('), ('docs/QA.md', '## Pemeriksaan versi gabungan')],
+          'Sebanyak 12 widget test dan 5 tes layanan lulus pada 12 November 2026.'),
+         ('P06: 1. ThemeData, ColorScheme.fromSeed, dan darkTheme',
+          [('app/lib/core/theme.dart', 'ColorScheme.fromSeed('), ('app/lib/core/app.dart', 'darkTheme:')],
+          'Aplikasi menyediakan tema terang dan gelap dengan warna dasar hijau.'),
+         ('P06: 2. Warna widget dari ColorScheme',
+          [('app/lib/widgets/ukm_card.dart', 'Theme.of(context).colorScheme')],
+          'Warna widget diambil dari ColorScheme pada tema aplikasi.'),
+         ('P06: 3. Font kustom',
+          [('app/pubspec.yaml', 'family: Manrope')],
+          'Font Manrope disimpan sebagai aset lokal dan disertai lisensi SIL OFL.'),
+         ('P06: 4. Ikon launcher sendiri',
+          [('app/pubspec.yaml', 'flutter_launcher_icons:'),
+           ('app/android/app/src/main/AndroidManifest.xml', 'android:icon=')],
+          'Ikon UKM Hub dibuat menggunakan flutter_launcher_icons dan digunakan pada launcher Android.'),
+         ('P06: 5. Gambar aset lokal',
+          [('app/pubspec.yaml', '- assets/images/'), ('app/lib/widgets/hub_widgets.dart', 'class UkmLogo')],
+          'Aset gambar didaftarkan dalam pubspec dan logo ditampilkan melalui UkmLogo.'),
+         ('P07: 1. Shelf, Shelf Router, dan minimal 12 item JSON',
+          [('server/pubspec.yaml', 'shelf:'),
+           ('server/pubspec.yaml', 'shelf_router:'),
+           ('server/data/ukm.json', '"id":"aksara"')],
+          'Server menggunakan shelf dan shelf_router. Dataset berisi 15 UKM dalam lima bidang.'),
+         ('P07: 2. GET daftar, detail, dan endpoint khas',
+          [('server/lib/api.dart', "router.get('/ukm'"),
+           ('server/lib/api.dart', "queryParameters['bidang']"),
+           ('server/lib/api.dart', "router.get('/ukm/<id>'")],
+          'API menyediakan daftar UKM, detail berdasarkan ID, dan filter bidang pada server.'),
+         ('P07: 3. Paket http dan konfigurasi API_URL',
+          [('app/lib/services/api_service.dart', "'package:http/http.dart'"),
+           ('app/lib/services/api_service.dart', "'API_URL'")],
+          'ApiService menggunakan paket http; alamat server ditentukan melalui API_URL saat menjalankan '
+          'aplikasi.'),
+         ('P07: 4. fromJson, toJson, dan konversi DateTime',
+          [('app/lib/models/ukm.dart', 'factory Ukm.fromJson'),
+           ('app/lib/models/ukm.dart', 'DateTime.parse('),
+           ('app/lib/models/ukm.dart', 'toJson()')],
+          'Model menyediakan fromJson dan toJson dengan konversi tanggal ISO ke DateTime dan sebaliknya.'),
+         ('P07: 5. FutureBuilder dengan tiga keadaan',
+          [('app/lib/screens/jelajah_page.dart', 'FutureBuilder<List<Ukm>>'),
+           ('app/lib/screens/jelajah_page.dart', 'snapshot.hasError'),
+           ('app/lib/screens/jelajah_page.dart', "Text('Coba lagi')")],
+          'FutureBuilder menampilkan keadaan memuat, pesan gagal dengan tombol Coba lagi, dan katalog saat '
+          'berhasil.'),
+         ('P07: 6. Pengujian menggunakan MockClient',
+          [('app/test/api_service_test.dart', 'MockClient('),
+           ('docs/QA.md', '## Pemeriksaan versi gabungan')],
+          'Lima tes MockClient lulus, mencakup filter, detail, status HTTP, format JSON, dan kegagalan '
+          'koneksi.')]
+    )
     assert len(entries) == 28
-    body = ["| Poin | File:baris aktual | Status kerangka |", "| --- | --- | --- |"]
-    for point, path, needle, status in entries:
-        body.append(f"| {point} | {ref(path, needle)} | {status} |")
+    body = ["| Poin | File:baris | Keterangan |", "| --- | --- | --- |"]
+    for point, sources, status in entries:
+        refs = "; ".join(ref(path, needle) for path, needle in sources)
+        body.append(f"| {point} | {refs} | {status} |")
     path = ROOT / "README.md"
     content = path.read_text(encoding="utf-8")
     start, end = "<!-- CHECKLIST:BEGIN -->", "<!-- CHECKLIST:END -->"
+    if content.count(start) != 1 or content.count(end) != 1:
+        raise ValueError("README harus memiliki tepat satu pasangan penanda CHECKLIST.")
     before, after = content.split(start, 1)
     _, tail = after.split(end, 1)
     path.write_text(before + start + "\n" + "\n".join(body) + "\n" + end + tail, encoding="utf-8")
 
 
 if __name__ == "__main__":
-    count = regions()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Perbarui bukti README dan peta region.")
+    parser.add_argument("--readme-only", action="store_true",
+                        help="Perbarui tabel README tanpa mengubah peta region.")
+    args = parser.parse_args()
     checklist()
-    print(f"Peta {count} batas tugas dan 28 baris README diperbarui.")
+    if args.readme_only:
+        print("28 baris README diperbarui; semua anchor source ditemukan.")
+    else:
+        count = regions()
+        print(f"Peta {count} batas tugas dan 28 baris README diperbarui.")

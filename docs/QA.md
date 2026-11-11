@@ -1,9 +1,10 @@
-# QA kerangka
+# QA UKM Hub
 
-Pemeriksaan 11 November 2026. Ini verifikasi fondasi yang dapat dijalankan,
-bukan klaim seluruh fitur UTS final kelompok sudah selesai.
+Dokumen ini memisahkan hasil pemeriksaan fondasi terdahulu dan pemeriksaan
+versi gabungan. Bagian riwayat dipertahankan sebagai bukti pada waktunya;
+hasil terbaru dan batasnya tercatat pada bagian Pemeriksaan versi gabungan.
 
-## Hasil aktual
+## Riwayat pemeriksaan fondasi - 11 November 2026
 
 - Proyek dibuat memakai `flutter create --org id.ac.telkomuniversity
   --project-name ukm_hub app`; launcher UKM Hub dan ikon lokal digenerasikan.
@@ -49,3 +50,41 @@ Belum final: dataset 12+, filter server/client/chips, pencarian nama, custom
 card Stack/Positioned, detail kaya, alasan multiline/validasi rinci, UI edit/hapus,
 cakupan QA anggota dan screenshot final. Lihat TASKS dan tabel status README.
 Belum push/merge/publikasi kelompok, video, atau pengumpulan LMS.
+
+## Pemeriksaan versi gabungan - 12 November 2026
+
+Pemeriksaan di folder `D:\TUGAS UTS MOBILE APP\UKM-HUB-KELOMPOK7`,
+pada source setelah commit `f198669`. Zona waktu: Asia/Jakarta (WIB).
+
+| Perintah | Hasil yang diamati |
+| --- | --- |
+| `dart analyze` pada server | No issues found |
+| `dart test` pada server | 5 tes lulus |
+| `flutter analyze` pada app | No issues found |
+| `flutter test --concurrency=1` pada app | 17 tes lulus: 12 widget dan 5 layanan MockClient |
+
+Source dataset berisi 15 UKM. Pemeriksaan ini menjalankan analisis dan tes;
+tidak membangun APK baru atau menjalankan ulang skenario Android setelah merge.
+Pemberitahuan versi paket yang lebih baru saat pub get bukan error analisis.
+
+### Asal screenshot yang disertakan
+
+Empat gambar `10-jelajah-tema.png`, `11-detail-identitas.png`,
+`12-form-identitas.png`, dan `13-pendaftaran-tunggal.png` tersedia di repo.
+Checksum keempat file cocok dengan manifest sumber DEV yang dicatat pada
+11 November 2026: emulator Android 17 / API 37 / x86_64, 1080 x 2400.
+Capture tersebut menggunakan API uji 10.0.2.2:18080, dengan dataset contoh UKM.
+Ini asal berkas gambar, bukan klaim capture ulang versi gabungan kelompok.
+Lakukan verifikasi perangkat dan ambil capture baru bila versi source berbeda.
+
+Tautan video demo belum diberikan. Build APK, demo perangkat versi gabungan,
+dan pengumpulan LMS tidak dinyatakan selesai oleh pemeriksaan ini.
+
+### Pemeriksaan dokumentasi
+
+Tabel README diperbarui dari anchor source aktual: 28 poin Bagian 3 UTS.
+Gunakan `python tools/update_maps.py --readme-only` untuk memperbarui tabel
+tanpa mengubah peta region. Validasi seluruh peta region pada source gabungan
+menemukan penanda region belum ditutup pada `app/lib/models/ukm.dart`.
+Penanda kode tersebut tidak diubah dalam pekerjaan dokumentasi ini;
+analisis dan tes Dart/Flutter tetap lulus seperti dicatat di atas.
