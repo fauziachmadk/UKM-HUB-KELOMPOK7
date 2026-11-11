@@ -1,5 +1,6 @@
 // Modul Jelajah. Penanggung jawab: Muhammad Azka Azkiya - 102022300166.
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../models/ukm.dart';
 import '../services/api_service.dart';
 import '../widgets/hub_widgets.dart';
@@ -62,6 +63,7 @@ class _JelajahPageState extends State<JelajahPage> {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     return ContentWidth(
       child: CustomScrollView(
         key: const PageStorageKey('jelajah-scroll'),
@@ -117,6 +119,79 @@ class _JelajahPageState extends State<JelajahPage> {
               ),
             ),
           ),
+          SliverToBoxAdapter(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.all(22),
+              decoration: BoxDecoration(
+                color: cs.primary,
+                borderRadius: BorderRadius.circular(22),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '•  BANYAK MINAT. SATU TEMPAT.',
+                          style: TextStyle(
+                            fontSize: 9,
+                            letterSpacing: 1.3,
+                            fontWeight: FontWeight.w700,
+                            color: cs.primaryContainer,
+                          ),
+                        ),
+                        const SizedBox(height: 14),
+                        Text(
+                          'Ada tempat buat',
+                          style: TextStyle(
+                            fontSize: 26,
+                            height: 1.2,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: -1.2,
+                            color: cs.onPrimary,
+                          ),
+                        ),
+                        Text(
+                          'versi seru kamu.',
+                          style: TextStyle(
+                            fontSize: 26,
+                            height: 1.2,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: -1.2,
+                            color: cs.primaryContainer,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          'Jelajahi UKM. Temukan teman satu frekuensi.',
+                          style: TextStyle(
+                            fontSize: 11,
+                            height: 1.6,
+                            color: cs.onPrimary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  ExcludeSemantics(
+                    child: SvgPicture.asset(
+                      'assets/images/hub-mark.svg',
+                      width: 48,
+                      height: 48,
+                      colorFilter: ColorFilter.mode(
+                        cs.primaryContainer,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 16)),
           FutureBuilder<List<Ukm>>(
             future: _future,
             builder: (context, snapshot) {
