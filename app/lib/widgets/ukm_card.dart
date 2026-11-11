@@ -47,6 +47,11 @@ class UkmCard extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: RecruitmentBadge(open: ukm.bukaRekrutmen),
+                  ),
                 ],
               ),
             ),
@@ -80,6 +85,26 @@ class UkmCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 10, color: cs.onSurfaceVariant),
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.people_outline,
+                        size: 14,
+                        color: cs.onSurfaceVariant,
+                      ),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: Text(
+                          '${ukm.jumlahAnggota} anggota',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: cs.onSurfaceVariant,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   if (isRegistered) ...[
                     const SizedBox(height: 8),
