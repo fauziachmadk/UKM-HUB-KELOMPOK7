@@ -311,6 +311,24 @@ class _JelajahPageState extends State<JelajahPage> {
                       ),
                     ),
                   ),
+                  if (items.isEmpty)
+                    SliverToBoxAdapter(
+                      child: HubMessage(
+                        icon: Icons.search_off,
+                        title: 'Belum ada yang cocok',
+                        message:
+                            'Coba nama lain atau pilih bidang yang berbeda.',
+                        action: OutlinedButton(
+                          onPressed: () {
+                            _search.clear();
+                            setState(() => _bidang = null);
+                            _reload();
+                          },
+                          child: const Text('Reset pencarian'),
+                        ),
+                      ),
+                    )
+                  else
                   SliverToBoxAdapter(
                     child: GridView.builder(
                       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
