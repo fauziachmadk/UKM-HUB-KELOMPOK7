@@ -63,4 +63,3 @@ class Ukm {
     'kegiatan': kegiatan,
   };
 }
-// END UKM07-FAUZI-UKM-CONTRACT - FAUZI SAMPAI SINI.
