@@ -16,46 +16,69 @@ class ApiException implements Exception {
   String toString() => message;
 }
 
-/// Client disuntikkan supaya tes tidak bergantung server jaringan.
+/// Client dapat disuntikkan agar tes memeriksa HTTP tanpa server sungguhan.
 class ApiService {
   ApiService({http.Client? client, String? baseUrl})
-    : _client = client ?? http.Client(),
-      _baseUrl =
-          baseUrl ??
-          const String.fromEnvironment(
-            'API_URL',
-            defaultValue: 'http://10.0.2.2:8080',
-          );
+      : _client = client ?? http.Client(),
+        _baseUrl =
+            baseUrl ??
+                const String.fromEnvironment(
+                  'API_URL',
+                  defaultValue: 'http://10.0.2.2:8080',
+                );
+
   final http.Client _client;
   final String _baseUrl;
 
-  Future<List<Ukm>> getUkm({String? bidang}) async {
-    // Filter belum dihubungkan: Arief mengirim query setelah kontrak Djalil siap.
-    if (bidang != null) {
-      throw const ApiException(
-        'Filter bidang belum diimplementasikan pada kerangka.',
-      );
-    }
+  Uri _uri(String path, [Map<String, String>? query]) => Uri.parse(
+    '${_baseUrl.replaceFirst(RegExp(r'/+$'), '')}$path',
+  ).replace(queryParameters: query);
+
+  Future<dynamic> _get(Uri uri) async {
     try {
-      final response = await _client.get(Uri.parse('$_baseUrl/ukm'));
+      final response = await _client
+          .get(uri, headers: {'Accept': 'application/json'})
+          .timeout(const Duration(seconds: 8));
       if (response.statusCode != 200) {
-        throw ApiException('API gagal (${response.statusCode}).');
+        throw ApiException(
+          response.statusCode == 404
+              ? 'UKM tidak ditemukan.'
+              : 'Server belum bisa memuat data (${response.statusCode}).',
+        );
       }
-      final json = jsonDecode(utf8.decode(response.bodyBytes)) as List;
-      return json
-          .map((item) => Ukm.fromJson(item as Map<String, dynamic>))
-          .toList();
-    } on ApiException {
-      rethrow;
-    } catch (_) {
+      return jsonDecode(utf8.decode(response.bodyBytes));
+    } on TimeoutException {
+      throw const ApiException('Server terlalu lama merespons. Coba lagi.');
+    } on http.ClientException {
       throw const ApiException(
-        'Katalog belum dapat dimuat. Periksa server dan API_URL.',
+        'Tidak terhubung ke server. Periksa koneksi dan alamat API.',
       );
+    } on FormatException {
+      throw const ApiException('Format data server tidak valid.');
+    }
+  }
+
+  /// Bidang dikirim sebagai query agar filter benar-benar dilakukan oleh API.
+  Future<List<Ukm>> getUkm({String? bidang}) async {
+    final data = await _get(
+      _uri('/ukm', bidang == null ? null : {'bidang': bidang}),
+    );
+    try {
+      return (data as List)
+          .map((e) => Ukm.fromJson(e as Map<String, dynamic>))
+          .toList();
+    } catch (_) {
+      throw const ApiException('Data katalog dari server tidak lengkap.');
     }
   }
 
   Future<Ukm> getUkmById(String id) async {
-    throw const ApiException('Endpoint detail belum dihubungkan oleh Arief.');
+    final data = await _get(_uri('/ukm/${Uri.encodeComponent(id)}'));
+    try {
+      return Ukm.fromJson(data as Map<String, dynamic>);
+    } catch (_) {
+      throw const ApiException('Data detail dari server tidak lengkap.');
+    }
   }
 
   void close() => _client.close();
