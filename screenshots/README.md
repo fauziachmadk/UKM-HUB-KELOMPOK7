@@ -1,15 +1,17 @@
 # Screenshot Android
 
-Folder ini berisi 16 gambar Android yang disertakan dalam repository.
-README utama menampilkan empat gambar: Jelajah, detail, form minat, dan
-Pendaftaran Saya. Berkas 10-13 identik dengan screenshot sumber DEV pada
-11 November 2026, dari emulator Android 17 / API 37, 1080 x 2400.
+Folder ini berisi 16 screenshot Android. Seluruh gambar ditampilkan
+pada [bagian Screenshot Android di README utama](../README.md#3-screenshot-android).
 
-Rincian asal dan batas verifikasi tersedia di
-[docs/QA.md](../docs/QA.md#asal-screenshot-yang-disertakan).
-Gambar ini tidak diklaim sebagai capture ulang versi gabungan setelah merge.
+Gambar 01-09 mencatat tampilan dan pengujian awal. Gambar 10-16 mencatat
+penyempurnaan tampilan Jelajah, detail, form, pendaftaran, dan tema gelap.
 
-Sesuai UTS, bukti final harus berasal dari emulator atau HP Android yang
-menjalankan versi yang dikumpulkan. Setelah verifikasi kelompok, perbarui
-capture jika source atau tampilan berbeda; catat tanggal, perangkat, commit,
-dan API_URL di QA. Hindari render web atau mockup sebagai bukti Android.
+Seluruh gambar cocok dengan checksum pada manifest sumber DEV tanggal
+11 November 2026. Perangkat yang dicatat adalah emulator Android 17 / API 37
+dengan resolusi 1080 x 2400. Gambar ini bukan capture ulang setelah merge.
+Rincian asal dan batas pengujian ada pada
+[catatan QA](../docs/QA.md#asal-screenshot-yang-disertakan).
+
+Untuk pengumpulan akhir, pastikan gambar sesuai dengan aplikasi yang diuji
+pada emulator atau HP Android. Perbarui screenshot jika versi aplikasi berubah
+dan catat tanggal, perangkat, versi source, serta API_URL pada QA.

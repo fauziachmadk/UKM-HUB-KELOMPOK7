@@ -69,13 +69,15 @@ Pemberitahuan versi paket yang lebih baru saat pub get bukan error analisis.
 
 ### Asal screenshot yang disertakan
 
-Empat gambar `10-jelajah-tema.png`, `11-detail-identitas.png`,
-`12-form-identitas.png`, dan `13-pendaftaran-tunggal.png` tersedia di repo.
-Checksum keempat file cocok dengan manifest sumber DEV yang dicatat pada
+Seluruh 16 file PNG pada folder `screenshots/` ditampilkan di README.
+Checksum setiap gambar cocok dengan manifest sumber DEV tanggal
 11 November 2026: emulator Android 17 / API 37 / x86_64, 1080 x 2400.
-Capture tersebut menggunakan API uji 10.0.2.2:18080, dengan dataset contoh UKM.
-Ini asal berkas gambar, bukan klaim capture ulang versi gabungan kelompok.
-Lakukan verifikasi perangkat dan ambil capture baru bila versi source berbeda.
+Gambar 01-09 menggunakan API 10.0.2.2:8080; gambar 10-16 menggunakan API uji
+10.0.2.2:18080. Semua memakai dataset contoh UKM.
+
+Keterangan tersebut mencatat asal berkas, bukan capture ulang versi gabungan
+setelah merge. Lakukan pengujian perangkat dan ambil gambar baru jika versi
+yang dikumpulkan berbeda.
 
 Tautan video demo belum diberikan. Build APK, demo perangkat versi gabungan,
 dan pengumpulan LMS tidak dinyatakan selesai oleh pemeriksaan ini.

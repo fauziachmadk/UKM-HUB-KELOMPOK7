@@ -102,17 +102,41 @@ Data UKM merupakan contoh untuk pembelajaran. Pendaftaran minat disimpan selama 
 ## 3. Screenshot Android
 
 <!-- SCREENSHOTS:START -->
-| Jelajah | Detail UKM |
+Seluruh 16 screenshot dalam folder `screenshots/` ditampilkan di bawah ini.
+
+| Jelajah - tampilan awal | Detail UKM - tampilan awal |
 | --- | --- |
-| ![Halaman Jelajah](screenshots/10-jelajah-tema.png) | ![Halaman detail UKM](screenshots/11-detail-identitas.png) |
+| ![Jelajah - tampilan awal](screenshots/01-jelajah.png) | ![Detail UKM - tampilan awal](screenshots/02-detail.png) |
 
-| Form minat bergabung | Pendaftaran Saya |
+| Form minat - tampilan awal | Pendaftaran Saya - tampilan awal |
 | --- | --- |
-| ![Form minat bergabung](screenshots/12-form-identitas.png) | ![Hasil pada Pendaftaran Saya](screenshots/13-pendaftaran-tunggal.png) |
+| ![Form minat - tampilan awal](screenshots/03-form.png) | ![Pendaftaran Saya - tampilan awal](screenshots/04-pendaftaran.png) |
 
-Gambar tambahan: [Profil](screenshots/05-profil.png), [tema gelap](screenshots/15-jelajah-gelap.png), [filter Teknologi](screenshots/07-filter-teknologi.png), [keadaan gagal](screenshots/08-server-mati.png), dan [hasil Coba lagi](screenshots/09-retry-berhasil.png).
+| Profil | Jelajah dengan tema gelap - tampilan awal |
+| --- | --- |
+| ![Profil](screenshots/05-profil.png) | ![Jelajah dengan tema gelap - tampilan awal](screenshots/06-jelajah-gelap.png) |
 
-Screenshot berasal dari pengujian versi pengembangan pada emulator Android tanggal 11 November 2026. Rincian pengambilan gambar tersedia pada [catatan screenshot](screenshots/README.md). Pengujian perangkat setelah penggabungan perubahan belum diulang; gambar perlu diperbarui jika versi yang dikumpulkan berbeda.
+| Filter bidang Teknologi | Pesan gagal saat server dimatikan |
+| --- | --- |
+| ![Filter bidang Teknologi](screenshots/07-filter-teknologi.png) | ![Pesan gagal saat server dimatikan](screenshots/08-server-mati.png) |
+
+| Katalog setelah Coba lagi berhasil | Jelajah dengan pilihan tema |
+| --- | --- |
+| ![Katalog setelah Coba lagi berhasil](screenshots/09-retry-berhasil.png) | ![Jelajah dengan pilihan tema](screenshots/10-jelajah-tema.png) |
+
+| Detail dan identitas UKM | Form minat dengan identitas UKM |
+| --- | --- |
+| ![Detail dan identitas UKM](screenshots/11-detail-identitas.png) | ![Form minat dengan identitas UKM](screenshots/12-form-identitas.png) |
+
+| Hasil pada Pendaftaran Saya | UKM yang sudah didaftari |
+| --- | --- |
+| ![Hasil pada Pendaftaran Saya](screenshots/13-pendaftaran-tunggal.png) | ![UKM yang sudah didaftari](screenshots/14-detail-terkunci.png) |
+
+| Jelajah dengan tema gelap | Informasi kegiatan UKM |
+| --- | --- |
+| ![Jelajah dengan tema gelap](screenshots/15-jelajah-gelap.png) | ![Informasi kegiatan UKM](screenshots/16-detail-kegiatan.png) |
+
+Screenshot diambil pada emulator Android saat pengujian versi pengembangan tanggal 11 November 2026. Rincian asal gambar tersedia pada [catatan screenshot](screenshots/README.md) dan [catatan QA](docs/QA.md#asal-screenshot-yang-disertakan). Pengujian perangkat setelah penggabungan perubahan belum diulang; perbarui gambar jika versi yang dikumpulkan berbeda.
 <!-- SCREENSHOTS:END -->
 
 ## 4. Tabel pemenuhan fitur UTS
@@ -124,7 +148,7 @@ Tabel berikut memuat 28 poin pemeriksaan dari Bagian 3 panduan UTS. Lokasi file 
 | --- | --- | --- |
 | P01–P02: 1. Pembuatan proyek dan nama paket | [docs/QA.md:9](docs/QA.md#L9); [app/android/app/build.gradle.kts:19](app/android/app/build.gradle.kts#L19) | Proyek dibuat dengan organisasi id.ac.telkomuniversity; nama paket Android id.ac.telkomuniversity.ukm_hub. |
 | P01–P02: 2. Nama aplikasi pada launcher | [app/android/app/src/main/AndroidManifest.xml:4](app/android/app/src/main/AndroidManifest.xml#L4) | Nama aplikasi yang ditampilkan adalah UKM Hub. |
-| P01–P02: 3. Android dan minimal 4 screenshot | [screenshots/README.md:1](screenshots/README.md#L1) | Empat screenshot Android ditampilkan pada bagian 3. Asal gambar dan catatan pengujian perangkat dijelaskan pada QA. |
+| P01–P02: 3. Android dan minimal 4 screenshot | [screenshots/README.md:1](screenshots/README.md#L1) | Seluruh 16 screenshot Android ditampilkan pada bagian 3. Asal gambar dan catatan pengujian perangkat dijelaskan pada QA. |
 | P01–P02: 4. Hasil flutter analyze | [docs/QA.md:54](docs/QA.md#L54) | flutter analyze selesai tanpa error maupun warning pada 12 November 2026. |
 | P03: 1. StatelessWidget, StatefulWidget, dan setState | [app/lib/widgets/ukm_card.dart:8](app/lib/widgets/ukm_card.dart#L8); [app/lib/screens/main_page.dart:17](app/lib/screens/main_page.dart#L17); [app/lib/screens/main_page.dart:56](app/lib/screens/main_page.dart#L56) | UkmCard menggunakan StatelessWidget; MainPage menggunakan StatefulWidget dan setState untuk memperbarui tampilan. |
 | P03: 2. TextField, controller, dan dispose | [app/lib/screens/jelajah_page.dart:199](app/lib/screens/jelajah_page.dart#L199); [app/lib/screens/jelajah_page.dart:46](app/lib/screens/jelajah_page.dart#L46) | Kolom pencarian menggunakan controller yang ditutup melalui dispose. |

@@ -69,8 +69,8 @@ def checklist():
           'Nama aplikasi yang ditampilkan adalah UKM Hub.'),
          ('P01–P02: 3. Android dan minimal 4 screenshot',
           [('screenshots/README.md', '# Screenshot')],
-          'Empat screenshot Android ditampilkan pada bagian 3. Asal gambar dan catatan pengujian perangkat '
-          'dijelaskan pada QA.'),
+          'Seluruh 16 screenshot Android ditampilkan pada bagian 3. Asal gambar dan catatan pengujian '
+          'perangkat dijelaskan pada QA.'),
          ('P01–P02: 4. Hasil flutter analyze',
           [('docs/QA.md', '## Pemeriksaan versi gabungan')],
           'flutter analyze selesai tanpa error maupun warning pada 12 November 2026.'),
