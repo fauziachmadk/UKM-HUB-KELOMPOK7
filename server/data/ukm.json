@@ -1,0 +1,87 @@
+[
+  {
+    "id": "aksara",
+    "nama": "Aksara",
+    "bidang": "Seni",
+    "ketua": "Alya Prameswari",
+    "jumlahAnggota": 64,
+    "bukaRekrutmen": true,
+    "berdiri": "2016-08-17T00:00:00Z",
+    "logo": "assets/images/seni.svg",
+    "singkat": "Ruang teater & cerita",
+    "deskripsi": "Dari latihan olah tubuh sampai panggung pertama. Aksara adalah ruang untuk bereksperimen dengan teater, menulis naskah, dan menemukan cara bercerita bersama.",
+    "kegiatan": [
+      "Latihan teater",
+      "Penulisan naskah",
+      "Produksi panggung"
+    ]
+  },
+  {
+    "id": "kode",
+    "nama": "Kode Kolektif",
+    "bidang": "Teknologi",
+    "ketua": "Raka Aditya",
+    "jumlahAnggota": 128,
+    "bukaRekrutmen": true,
+    "berdiri": "2018-03-12T00:00:00Z",
+    "logo": "assets/images/teknologi.svg",
+    "singkat": "Belajar. Bikin. Bagikan.",
+    "deskripsi": "Tempat belajar teknologi lewat proyek kecil yang benar-benar selesai. Temukan teman untuk membangun aplikasi, bertukar ide, dan mencoba hackathon pertamamu.",
+    "kegiatan": [
+      "Proyek aplikasi",
+      "Belajar bersama",
+      "Hackathon"
+    ]
+  },
+  {
+    "id": "rally",
+    "nama": "Rally Badminton",
+    "bidang": "Olahraga",
+    "ketua": "Dimas Pratama",
+    "jumlahAnggota": 86,
+    "bukaRekrutmen": true,
+    "berdiri": "2014-06-02T00:00:00Z",
+    "logo": "assets/images/olahraga.svg",
+    "singkat": "Satu lapangan, banyak teman",
+    "deskripsi": "Latihan rutin untuk yang baru memegang raket sampai yang ingin bertanding. Mulai dari teknik dasar, pertandingan persahabatan, dan latihan tim kampus.",
+    "kegiatan": [
+      "Latihan teknik",
+      "Main bersama",
+      "Turnamen internal"
+    ]
+  },
+  {
+    "id": "jejak",
+    "nama": "Jejak Baik",
+    "bidang": "Sosial",
+    "ketua": "Nadia Rahma",
+    "jumlahAnggota": 94,
+    "bukaRekrutmen": true,
+    "berdiri": "2019-02-20T00:00:00Z",
+    "logo": "assets/images/sosial.svg",
+    "singkat": "Mulai dari hal kecil",
+    "deskripsi": "Bertemu teman yang ingin berkontribusi lewat kegiatan kerelawanan. Rancang aksi sosial yang dekat dengan kebutuhan lingkungan sekitar kampus.",
+    "kegiatan": [
+      "Kelas berbagi",
+      "Aksi lingkungan",
+      "Relawan kampus"
+    ]
+  },
+  {
+    "id": "ruang-iman",
+    "nama": "Ruang Iman",
+    "bidang": "Keagamaan",
+    "ketua": "Farhan Akbar",
+    "jumlahAnggota": 110,
+    "bukaRekrutmen": true,
+    "berdiri": "2013-07-09T00:00:00Z",
+    "logo": "assets/images/keagamaan.svg",
+    "singkat": "Bertumbuh bersama",
+    "deskripsi": "Ruang belajar, berdiskusi, dan saling mendukung dalam kegiatan kerohanian. Terbuka untuk mahasiswa yang ingin ikut kegiatan dan memperluas pertemanan.",
+    "kegiatan": [
+      "Diskusi rutin",
+      "Kegiatan kerohanian",
+      "Bakti sosial"
+    ]
+  }
+]

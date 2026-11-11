@@ -1,18 +1,19 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
-
-# Other files and folders
-.settings/
-
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
-
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Folder pribadi, dependensi, hasil build dan bukti runtime bukan source.
+**/.dart_tool/
+**/build/
+**/.gradle/
+**/local.properties
+**/Generated.xcconfig
+**/flutter_export_environment.sh
+**/.flutter-plugins-dependencies
+**/ephemeral/
+**/.idea/
+**/*.iml
+**/__pycache__/
+evidence/*.log
+evidence/*.pid
+evidence/*.xml
+tmp/
+artifacts/
+*.zip
+.DS_Store

@@ -1,0 +1,31 @@
+name: ukm_hub
+description: Katalog komunitas kampus - UTS PAB Kelompok 07.
+publish_to: none
+version: 1.0.0+1
+environment:
+  sdk: ^3.10.0
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.6.0
+  flutter_svg: ^2.2.3
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+  fonts:
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope.ttf
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: assets/images/launcher.png
+  adaptive_icon_background: '#244b3d'
+  adaptive_icon_foreground: assets/images/launcher_foreground.png
+  min_sdk_android: 21
