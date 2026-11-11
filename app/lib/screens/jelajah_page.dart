@@ -191,7 +191,27 @@ class _JelajahPageState extends State<JelajahPage> {
               ),
             ),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 16)),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 22, 20, 12),
+              child: TextField(
+                key: const Key('search-ukm'),
+                controller: _search,
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  hintText: 'Cari nama UKM...',
+                  prefixIcon: const Icon(Icons.search, size: 21),
+                  suffixIcon: _search.text.isEmpty
+                      ? null
+                      : IconButton(
+                          tooltip: 'Hapus pencarian',
+                          onPressed: _search.clear,
+                          icon: const Icon(Icons.close),
+                        ),
+                ),
+              ),
+            ),
+          ),
           FutureBuilder<List<Ukm>>(
             future: _future,
             builder: (context, snapshot) {
@@ -216,7 +236,11 @@ class _JelajahPageState extends State<JelajahPage> {
                   ),
                 );
               }
-              final items = snapshot.data ?? [];
+              // Pencarian nama hanya menyaring hasil yang sudah diterima.
+              final query = _search.text.trim().toLowerCase();
+              final items = snapshot.data!
+                  .where((ukm) => ukm.nama.toLowerCase().contains(query))
+                  .toList();
               return SliverToBoxAdapter(
                 child: GridView.builder(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
