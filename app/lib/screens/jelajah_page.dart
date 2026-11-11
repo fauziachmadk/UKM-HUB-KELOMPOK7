@@ -28,7 +28,37 @@ class JelajahPage extends StatefulWidget {
 }
 
 class _JelajahPageState extends State<JelajahPage> {
-  late Future<List<Ukm>> _catalog = widget.api.getUkm();
+  final _search = TextEditingController();
+  String? _bidang;
+  late Future<List<Ukm>> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = widget.api.getUkm();
+    _search.addListener(_searchChanged);
+  }
+
+  void _searchChanged() => setState(() {});
+  @override
+  void dispose() {
+    _search.removeListener(_searchChanged);
+    _search.dispose();
+    super.dispose();
+  }
+
+  Future<void> _reload() async {
+    final request = widget.api.getUkm(bidang: _bidang);
+    setState(() {
+      _future = request;
+    });
+    // Error tetap ditampilkan FutureBuilder; refresh gesture boleh selesai.
+    try {
+      await request;
+    } on ApiException {
+      /* Ditangani di tampilan gagal. */
+    }
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -49,7 +79,7 @@ class _JelajahPageState extends State<JelajahPage> {
     ),
     body: ContentWidth(
       child: FutureBuilder<List<Ukm>>(
-        future: _catalog,
+        future: _future,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -60,10 +90,7 @@ class _JelajahPageState extends State<JelajahPage> {
               title: 'Katalog belum tersedia',
               message: '${snapshot.error}',
               action: FilledButton(
-                onPressed: () => setState(() {
-                  // Callback setState sinkron; jangan mengembalikan Future.
-                  _catalog = widget.api.getUkm();
-                }),
+                onPressed: _reload,
                 child: const Text('Coba lagi'),
               ),
             );
