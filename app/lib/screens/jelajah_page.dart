@@ -244,19 +244,26 @@ class _JelajahPageState extends State<JelajahPage> {
                 return const SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.all(48),
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Column(
+                      children: [
+                        CircularProgressIndicator(),
+                        SizedBox(height: 16),
+                        Text('Memuat komunitas...'),
+                      ],
+                    ),
                   ),
                 );
               }
               if (snapshot.hasError) {
                 return SliverToBoxAdapter(
                   child: HubMessage(
-                    icon: Icons.cloud_off_outlined,
+                    icon: Icons.wifi_off_outlined,
                     title: 'Katalog belum tersedia',
-                    message: '${snapshot.error}',
-                    action: FilledButton(
+                    message: snapshot.error.toString(),
+                    action: FilledButton.icon(
                       onPressed: _reload,
-                      child: const Text('Coba lagi'),
+                      icon: const Icon(Icons.refresh),
+                      label: const Text('Coba lagi'),
                     ),
                   ),
                 );
@@ -266,27 +273,67 @@ class _JelajahPageState extends State<JelajahPage> {
               final items = snapshot.data!
                   .where((ukm) => ukm.nama.toLowerCase().contains(query))
                   .toList();
-              return SliverToBoxAdapter(
-                child: GridView.builder(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                  shrinkWrap: true,
-                  primary: false,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 260,
-                    mainAxisExtent: 254,
-                    mainAxisSpacing: 12,
-                    crossAxisSpacing: 12,
-                  ),
-                  itemCount: items.length,
-                  itemBuilder: (context, index) => UkmCard(
-                    ukm: items[index],
-                    isRegistered: widget.registeredIds.contains(
-                      items[index].id,
+              return SliverMainAxisGroup(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 14, 12, 12),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Temukan komunitasmu',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  '${items.length} UKM untuk dijelajahi',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: cs.onSurfaceVariant,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: _reload,
+                            tooltip: 'Muat ulang katalog',
+                            icon: const Icon(Icons.refresh),
+                          ),
+                        ],
+                      ),
                     ),
-                    onTap: () => widget.onOpen(items[index]),
                   ),
-                ),
+                  SliverToBoxAdapter(
+                    child: GridView.builder(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      shrinkWrap: true,
+                      primary: false,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 260,
+                        mainAxisExtent: 254,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                      ),
+                      itemCount: items.length,
+                      itemBuilder: (context, index) => UkmCard(
+                        ukm: items[index],
+                        isRegistered: widget.registeredIds.contains(
+                          items[index].id,
+                        ),
+                        onTap: () => widget.onOpen(items[index]),
+                      ),
+                    ),
+                  ),
+                ],
               );
             },
           ),
