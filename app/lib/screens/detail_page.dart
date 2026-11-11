@@ -27,10 +27,6 @@ class DetailPage extends StatelessWidget {
   bool get _alreadyRegistered => hasRegistrationForUkm(registrations, ukm.id);
   // END UKM07-AZKA-DETAIL-GUIDE - AZKA SAMPAI SINI.
 
-  // BEGIN UKM07-VANESA-DETAIL-HANDOFF
-  // MULAI BAGIAN VANESA. Jaga hasil null dan mounted saat mengembangkan form.
-  // TODO(VANESA): uji batal, data invalid, dan alur pendaftaran sampai induk.
-  /// Hasil kembali ke MainPage supaya daftar minat hanya punya satu pemilik.
   Future<void> _register(BuildContext context) async {
     if (_alreadyRegistered || !ukm.bukaRekrutmen) return;
     final record = await Navigator.push<Pendaftaran>(
@@ -47,7 +43,6 @@ class DetailPage extends StatelessWidget {
     if (!context.mounted || record == null) return;
     Navigator.pop(context, record);
   }
-  // END UKM07-VANESA-DETAIL-HANDOFF - VANESA SAMPAI SINI.
 
   // BEGIN UKM07-AZKA-DETAIL-VIEW
   // MULAI BAGIAN AZKA.
